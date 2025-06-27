@@ -7,7 +7,6 @@ import html from "remark-html";
 
 const postsDirectory = path.join(process.cwd(), "posts");
 
-// ✅ 단일 글 데이터 가져오기
 export async function getPostData(fileName: string) {
   const fullPath = path.join(postsDirectory, fileName);
   const fileContents = fs.readFileSync(fullPath, "utf8");
@@ -20,10 +19,10 @@ export async function getPostData(fileName: string) {
     ...data,
     contentHtml,
     slug: fileName.replace(/\.md$/, ""),
+    tags: data.tags || [],
   };
 }
 
-// ✅ 글 목록에서 title, date, slug만 가져오기
 export function getAllPostsMeta() {
   const fileNames = fs.readdirSync(postsDirectory);
 
@@ -36,6 +35,7 @@ export function getAllPostsMeta() {
       title: data.title || "제목 없음",
       date: data.date || "날짜 없음",
       slug: fileName.replace(/\.md$/, ""),
+      tags: data.tags || [],
     };
   });
 }
