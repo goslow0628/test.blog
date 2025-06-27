@@ -1,31 +1,20 @@
-import Link from "next/link";
+interface TagListProps {
+  tags: { name: string; count: number }[];
+}
 
-type TagCount = {
-  name: string;
-  count: number;
-};
-
-const tagList: TagCount[] = [
-  { name: "all", count: 204 },
-  { name: "Java", count: 41 },
-  { name: "데이터베이스", count: 21 },
-  { name: "Spring", count: 18 },
-  { name: "HTTP", count: 10 },
-  // 👉 나중에 자동 계산하도록 개선 가능
-];
-
-export default function TagList() {
+export default function TagList({ tags }: TagListProps) {
   return (
-    <aside className="w-full md:w-60 md:pl-8 mt-8 md:mt-0">
-      <h2 className="text-lg font-semibold mb-2">TAG LIST</h2>
-      <ul className="space-y-1">
-        {tagList.map((tag) => (
+    <aside className="sticky top-24">
+      <h3 className="text-lg font-bold mb-4 text-gray-800">TAG LIST</h3>
+      <ul className="space-y-2">
+        {tags.map((tag) => (
           <li key={tag.name}>
-            <Link href={tag.name === "all" ? "/" : `/tag/${tag.name}`}>
-              <span className="text-sm text-gray-700 hover:underline cursor-pointer">
-                {tag.name} ({tag.count})
-              </span>
-            </Link>
+            <a
+              href={`/tag/${tag.name}`}
+              className="text-sm text-gray-600 hover:text-blue-600"
+            >
+              {tag.name} ({tag.count})
+            </a>
           </li>
         ))}
       </ul>
