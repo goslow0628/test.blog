@@ -1,49 +1,55 @@
-// pages/index.tsx
-import { GetStaticProps } from "next";
 import Link from "next/link";
-import { getAllPostsMeta } from "@/lib/markdown";
+import { GetStaticProps } from "next";
+import { getSortedPostsData } from "../lib/markdown";
 
-type PostMeta = {
+type Post = {
+  slug: string;
   title: string;
   date: string;
-  slug: string;
-  tags: string[];
+  tags?: string[];
+  content: string;
 };
 
 type Props = {
-  posts: PostMeta[];
+  posts: Post[];
 };
 
 export default function Home({ posts }: Props) {
   return (
-    <main className="max-w-4xl mx-auto px-6 py-10">
-      <h1 className="text-3xl font-bold mb-6">📘 블로그 전체 글 목록</h1>
-
-      <ul className="space-y-6">
-        {posts.map((post) => {
-          const firstTag = post.tags?.[0] || "uncategorized"; // 태그가 없을 경우 대비
-          return (
-            <li key={post.slug}>
-              <Link href={`/${firstTag}/${post.slug}`}>
-                <a className="block border-b pb-4 hover:bg-gray-50">
-                  <h2 className="text-xl font-semibold">{post.title}</h2>
-                  <p className="text-sm text-gray-500">{post.date}</p>
-                </a>
-              </Link>
-            </li>
-          );
-        })}
+    <main className="max-w-3xl mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold mb-6">📚 블로그</h1>
+      <ul className="space-y-8">
+        {posts.map((post) => (
+          <li key={post.slug} className="border-b pb-6">
+            <Link href={`/tag/${post.tags?.[0] ?? "etc"}/${post.slug}`}>
+              <h2 className="text-xl font-semibold hover:underline">
+                {post.title}
+              </h2>
+            </Link>
+            <p className="text-sm text-gray-500 mt-1">{post.date}</p>
+            <div className="mt-2 flex flex-wrap gap-2">
+              {post.tags?.map((tag) => (
+                <span
+                  key={tag}
+                  className="text-xs bg-gray-200 px-2 py-1 rounded-full"
+                >
+                  #{tag}
+                </span>
+              ))}
+            </div>
+            <p className="mt-3 text-gray-700 text-sm line-clamp-2">
+              {post.content.slice(0, 100)}...
+            </p>
+          </li>
+        ))}
       </ul>
     </main>
   );
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const posts = getAllPostsMeta();
-  posts.sort((a, b) => (a.date < b.date ? 1 : -1));
+  const posts = getSortedPostsData();
   return {
-    props: {
-      posts,
-    },
+    props: { posts },
   };
 };
