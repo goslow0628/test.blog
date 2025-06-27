@@ -1,10 +1,33 @@
 // src/app/page.tsx
+import fs from "fs/promises";
+import path from "path";
+import matter from "gray-matter";
+
 import Header from "@/components/Header";
 import Profile from "@/components/Profile";
 import PostList from "@/components/PostList";
 import TagSidebar from "@/components/TagSidebar";
 
-export default function Home() {
+export default async function Home() {
+  const postsDirectory = path.join(process.cwd(), "posts");
+  const filenames = await fs.readdir(postsDirectory);
+
+  const posts = await Promise.all(
+    filenames.map(async (filename) => {
+      const filePath = path.join(postsDirectory, filename);
+      const fileContents = await fs.readFile(filePath, "utf8");
+      const { data, content } = matter(fileContents);
+
+      return {
+        slug: filename.replace(/\.md$/, ""),
+        title: data.title,
+        date: data.date,
+        tags: data.tags || [],
+        excerpt: content.slice(0, 100),
+      };
+    })
+  );
+
   return (
     <div>
       {/* 상단 헤더 */}
@@ -30,7 +53,7 @@ export default function Home() {
           }}
         >
           <Profile />
-          <PostList />
+          <PostList posts={posts} />
         </div>
 
         {/* 사이드바 */}

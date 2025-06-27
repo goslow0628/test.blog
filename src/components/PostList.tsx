@@ -1,12 +1,29 @@
-export default function PostList() {
+export type Post = {
+  slug: string;
+  title: string;
+  date: string;
+  tags: string[];
+  excerpt: string;
+};
+
+export default function PostList({ posts }: { posts: Post[] }) {
   return (
-    <section>
-      <article>
-        <h3>Redlock 알고리즘 알아보기</h3>
-        <p>November 23, 2024</p>
-        <p>블로그에 글을 오랜만에 쓴다. 요즘 공부한 대부분의 내용은 ...</p>
-      </article>
-      {/* 다른 글들도 이어서 여기에 추가될 수 있음 */}
-    </section>
+    <div>
+      {posts.map((post) => (
+        <div key={post.slug} style={{ marginBottom: "2rem" }}>
+          <h2>{post.title}</h2>
+          <p>{post.date}</p>
+          <p>{post.excerpt}...</p>
+          <div>
+            <strong>Tags:</strong>
+            <ul>
+              {post.tags.map((tag) => (
+                <li key={tag}>#{tag}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      ))}
+    </div>
   );
 }
