@@ -1,6 +1,6 @@
 import Header from "@/components/Header";
 import Profile from "@/components/Profile";
-import PostList from "@/components/Postlist";
+import PostList from "@/components/PostList";
 import TagList from "@/components/Taglist";
 
 export default function Home() {
