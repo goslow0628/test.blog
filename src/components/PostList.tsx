@@ -15,7 +15,7 @@ export default function PostList({ posts }: { posts: Post[] }) {
           <p>{post.date}</p>
           <p>{post.excerpt}...</p>
           <div>
-            <strong>Tags:</strong>
+            <p>Tags:</p>
             <ul>
               {post.tags.map((tag) => (
                 <li key={tag}>#{tag}</li>
