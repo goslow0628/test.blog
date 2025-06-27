@@ -1,3 +1,4 @@
+// src/app/layout.tsx
 import "@/styles/globals.css";
 import Header from "@/components/Header";
 import Profile from "@/components/Profile";
@@ -15,21 +16,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <body className="min-h-screen bg-white text-gray-900">
-        <div className="flex flex-col lg:flex-row max-w-screen-xl mx-auto">
-          {/* 왼쪽 상단 로고 */}
-          <aside className="lg:w-1/5 w-full p-4">
-            <Header />
-          </aside>
-
-          {/* 중앙 콘텐츠 */}
-          <main className="lg:w-3/5 w-full p-4">
+      <body>
+        <Header />
+        <div className="flex">
+          <main className="flex-1">
             <Profile />
             {children}
           </main>
-
-          {/* 오른쪽 태그 리스트 */}
-          <aside className="lg:w-1/5 w-full p-4 border-l border-gray-200">
+          <aside>
             <TagSidebar />
           </aside>
         </div>
