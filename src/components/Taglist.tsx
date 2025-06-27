@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 interface TagListProps {
   tags: { name: string; count: number }[];
 }
@@ -9,12 +11,12 @@ export default function TagList({ tags }: TagListProps) {
       <ul className="space-y-2">
         {tags.map((tag) => (
           <li key={tag.name}>
-            <a
+            <Link
               href={`/tag/${tag.name}`}
               className="text-sm text-gray-600 hover:text-blue-600"
             >
               {tag.name} ({tag.count})
-            </a>
+            </Link>
           </li>
         ))}
       </ul>
