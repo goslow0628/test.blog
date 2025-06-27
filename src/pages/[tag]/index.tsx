@@ -3,7 +3,20 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import { getAllPostsMeta } from "@/lib/markdown";
 import Link from "next/link";
 
-export default function TagPage({ posts, tag }: { posts: any[]; tag: string }) {
+type PostMeta = {
+  title: string;
+  date: string;
+  slug: string;
+  tags: string[];
+};
+
+export default function TagPage({
+  posts,
+  tag,
+}: {
+  posts: PostMeta[];
+  tag: string;
+}) {
   return (
     <main className="max-w-2xl mx-auto px-6 py-10">
       <h1 className="text-2xl font-bold mb-6">📂 #{tag} 태그 글</h1>
