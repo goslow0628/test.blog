@@ -7,6 +7,7 @@ import html from "remark-html";
 
 const postsDirectory = path.join(process.cwd(), "posts");
 
+// ✅ 단일 글 데이터 가져오기
 export async function getPostData(fileName: string) {
   const fullPath = path.join(postsDirectory, fileName);
   const fileContents = fs.readFileSync(fullPath, "utf8");
@@ -21,6 +22,8 @@ export async function getPostData(fileName: string) {
     slug: fileName.replace(/\.md$/, ""),
   };
 }
+
+// ✅ 글 목록에서 title, date, slug만 가져오기
 export function getAllPostsMeta() {
   const fileNames = fs.readdirSync(postsDirectory);
 

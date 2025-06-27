@@ -1,10 +1,11 @@
-# posts/hello-world.md
-
+---
+title: "Hello Vercel"
+date: "2025-06-27"
+tags:
+  - Next.js
+  - 블로그
 ---
 
-title: "첫 번째 블로그 글"
-date: "2025-06-25"
+# Vercel 블로그 배포 테스트
 
----
-
-이건 내가 Markdown으로 작성한 첫 번째 글이다!
+이 글은 Vercel에서 정적 생성되고 자동 배포되는지 확인하기 위한 글입니다.
