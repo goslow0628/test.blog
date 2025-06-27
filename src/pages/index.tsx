@@ -17,6 +17,13 @@ export default function Home() {
         <aside className="hidden md:block col-span-4">
           <TagList tags={[]} />
         </aside>
+
+        <h1 className="text-4xl font-bold text-center text-blue-600">
+          Tailwind Test
+        </h1>
+        <p className="mt-6 text-center text-gray-700">
+          Tailwind가 잘 작동하면 이 문장이 회색이고 가운데 정렬됩니다.
+        </p>
       </main>
     </div>
   );

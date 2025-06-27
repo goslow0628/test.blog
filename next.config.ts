@@ -1,14 +1,15 @@
 // next.config.js
 /** @type {import('next').NextConfig} */
+
+const isGithubPages = process.env.GITHUB_PAGES === "true";
+
 const nextConfig = {
   output: "export",
-  basePath: "/test.blog",
-  assetPrefix: "/test.blog",
-};
-
-module.exports = {
   images: {
     unoptimized: true,
   },
-  output: "export", // 정적 export 용
+  basePath: isGithubPages ? "/test.blog" : "",
+  assetPrefix: isGithubPages ? "/test.blog/" : "",
 };
+
+export default nextConfig;
