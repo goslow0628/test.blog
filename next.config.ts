@@ -6,4 +6,9 @@ const nextConfig = {
   assetPrefix: "/test.blog",
 };
 
-module.exports = nextConfig;
+module.exports = {
+  images: {
+    unoptimized: true,
+  },
+  output: "export", // 정적 export 용
+};
