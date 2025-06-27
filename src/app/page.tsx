@@ -2,7 +2,6 @@ import fs from "fs/promises";
 import path from "path";
 import matter from "gray-matter";
 
-`import Header from "@/components/Header";`;
 import Profile from "@/components/Profile";
 import PostList from "@/components/PostList";
 import TagSidebar from "@/components/TagSidebar";
